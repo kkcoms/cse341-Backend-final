@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <div class="container">
+    <a href="/" class="navbar-brand logo"><img class="logo" src="/images/laptop.svg" alt="BYU Idaho logo"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+      aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="nav navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link <%= path === '/project1' ? 'active' : ''%>" href="/project1">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <%= path === '/project1/products' ? 'active' : ''%>" href="/project1/products">Products</a>
+        </li>
+        <% if (isAuthenticated) { %>
+          <li class="nav-item">
+            <a class="nav-link <%= path === '/project1/cart' ? 'active' : ''%>" href="/project1/cart">Cart</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= path === '/project1/orders' ? 'active' : ''%>" href="/project1/orders">Orders</a>
+          </li>
+
+          <!-- Admin Routes -->
+          <li class="nav-item">
+            <a class="nav-link <%= path === '/project1/admin/products/new' ? 'active' : ''%>"
+              href="/project1/admin/products/new">Add Product</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= path === '/project1/admin/products' ? 'active' : ''%>"
+              href="/project1/admin/products">Admin Products</a>
+          </li>
+          <% } %>
+      </ul>
+      <ul class="nav navbar-nav">
+        <% if (!isAuthenticated) { %>
+          <li class="nav-item">
+            <a class="nav-link <%= path === '/project1/login' ? 'active' : ''%>" href="/project1/login">Sign in</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= path === '/project1/signup' ? 'active' : ''%>" href="/project1/signup">Sign up</a>
+          </li>
+          <% } else { %>
+            <li class="nav-item">
+              <form action="/project1/logout" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button type="submit" class="btn btn-link text-white-50">Logout</button>
+              </form>
+            </li>
+            <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>
